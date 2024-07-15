@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Data
-public class BlogProperties {
+public class BlogConfigBean {
     @Value("${mrbird.blog.name}")
     private String name;
     @Value("${mrbird.blog.title}")

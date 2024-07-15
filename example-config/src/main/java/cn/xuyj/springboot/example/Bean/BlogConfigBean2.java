@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Configuration;
  * @since 2024/7/15 11:10
  */
 @Configuration
+//读取指定前缀的配置
 @ConfigurationProperties(prefix = "mrbird.blog")
 @Data
-public class BlogProperties2 {
+public class BlogConfigBean2 {
     private String name;
     private String title;
 }
