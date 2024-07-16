@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>account</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+<body>
+    <table>
+        <tr>
+            <!--表头-->
+            <th>序号</th>
+            <th>账号</th>
+            <th>名称</th>
+            <th>密码</th>
+            <th>账号类型</th>
+            <th>电话</th>
+        </tr>
+        <tr th:each="list,stat : ${accountList}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${list.account}"></td>
+            <td th:text="${list.name}"></td>
+            <td th:text="${list.password}"></td>
+            <td th:text="${list.accountType}"></td>
+            <td th:text="${list.tel}"></td>
+        </tr>
+    </table>
+</body>
+</html>
