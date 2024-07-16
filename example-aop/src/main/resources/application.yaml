@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /aop
+
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:postgresql://192.168.2.230:15432/test?currentSchema=springboot
+      username: tester
+      password: 1234

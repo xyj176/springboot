@@ -18,6 +18,7 @@
         <module>example-config</module>
         <module>example-mybatis</module>
         <module>example-JdbcTemplate</module>
+        <module>example-aop</module>
     </modules>
 
     <properties>
