@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /cache
+
+logging:
+  level:
+    cn:
+      xuyj:
+        springboot:
+          example:
+            mapper: debug
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:postgresql://192.168.2.230:15432/test?currentSchema=springboot
+      username: tester
+      password: 1234

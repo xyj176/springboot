@@ -20,6 +20,7 @@
         <module>example-JdbcTemplate</module>
         <module>example-aop</module>
         <module>example-thymeleaf</module>
+        <module>example-cache</module>
     </modules>
 
     <properties>
