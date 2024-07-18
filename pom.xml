@@ -21,6 +21,7 @@
         <module>example-aop</module>
         <module>example-thymeleaf</module>
         <module>example-cache</module>
+        <module>example-cache-redis</module>
     </modules>
 
     <properties>
