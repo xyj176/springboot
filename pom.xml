@@ -23,6 +23,7 @@
         <module>example-cache</module>
         <module>example-cache-redis</module>
         <module>example-swagger</module>
+        <module>example-logback</module>
     </modules>
 
     <properties>
