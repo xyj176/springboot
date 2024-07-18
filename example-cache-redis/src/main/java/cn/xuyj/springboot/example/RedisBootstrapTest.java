@@ -23,8 +23,8 @@ public class RedisBootstrapTest {
         Student student1 = this.service.query("001");
         System.out.println("学号" + student1.getId() + "的学生姓名为：" + student1.getName());
 
-        student1.setName("康康");
-        service.update(student1);
+//        student1.setName("康康");
+//        service.update(student1);
 
         Student student2 = this.service.query("001");
         System.out.println("学号" + student2.getId() + "的学生姓名为：" + student2.getName());
