@@ -24,6 +24,7 @@
         <module>example-cache-redis</module>
         <module>example-swagger</module>
         <module>example-logback</module>
+        <module>example-test</module>
     </modules>
 
     <properties>
