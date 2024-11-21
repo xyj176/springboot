@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -16,11 +17,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @since 2024/7/18 15:08
  */
 @Configuration
-@EnableSwagger2
+@EnableOpenApi
 public class SwaggerConfig {
     @Bean
     public Docket buildDocket() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 .apiInfo(buildApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.xuyj.springboot.example.controller"))

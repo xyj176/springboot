@@ -23,7 +23,7 @@ public class SwaggerBootstrap {
                         "Application '{}' is running! Access URLs:\n\t" +
                         "Local: \t\thttp://localhost:{}\n\t" +
                         "External: \thttp://{}:{}\n\t" +
-                        "Doc: \thttp://{}:{}{}/swagger-ui.html\n" +
+                        "Doc: \thttp://{}:{}{}/swagger-ui/index.html\n" +
                         "\t---Staff Mailbox started successfully\n" +
                         "\t---启动成功---\n" +
                         "----------------------------------------------------------",
