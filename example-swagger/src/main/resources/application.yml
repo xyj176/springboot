@@ -3,6 +3,9 @@ server:
   servlet:
     context-path: /xuyj
 
+swagger:
+  enable: true
+
 spring:
   application:
     name: spring-example-swagger

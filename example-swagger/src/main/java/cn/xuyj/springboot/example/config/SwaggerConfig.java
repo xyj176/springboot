@@ -1,5 +1,6 @@
 package cn.xuyj.springboot.example.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -10,7 +11,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author xuyj
@@ -19,10 +19,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableOpenApi
 public class SwaggerConfig {
+    @Value("${swagger.enable}")
+    boolean enable;
+
     @Bean
     public Docket buildDocket() {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(buildApiInfo())
+                .enable(enable)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.xuyj.springboot.example.controller"))
                 .paths(PathSelectors.any())
