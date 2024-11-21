@@ -19,14 +19,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 @EnableOpenApi
 public class SwaggerConfig {
-    @Value("${swagger.enable}")
-    boolean enable;
 
     @Bean
     public Docket buildDocket() {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(buildApiInfo())
-                .enable(enable)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.xuyj.springboot.example.controller"))
                 .paths(PathSelectors.any())

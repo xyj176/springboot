@@ -3,8 +3,9 @@ server:
   servlet:
     context-path: /xuyj
 
-swagger:
-  enable: true
+springfox:
+  documentation:
+    auto-startup: false
 
 spring:
   application:
