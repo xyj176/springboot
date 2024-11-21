@@ -3,9 +3,14 @@ server:
   servlet:
     context-path: /xuyj
 
+# swagger文档登录信息
+swagger:
+  username: xuyj
+  password: 1234
+
 springfox:
   documentation:
-    auto-startup: false
+    auto-startup: true
 
 spring:
   application:
