@@ -27,6 +27,7 @@
         <module>example-test</module>
         <module>example-actuator</module>
         <module>example-war</module>
+        <module>example-exception</module>
     </modules>
 
     <properties>
