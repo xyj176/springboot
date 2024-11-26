@@ -26,6 +26,7 @@
         <module>example-logback</module>
         <module>example-test</module>
         <module>example-actuator</module>
+        <module>example-war</module>
     </modules>
 
     <properties>
