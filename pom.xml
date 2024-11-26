@@ -25,6 +25,7 @@
         <module>example-swagger</module>
         <module>example-logback</module>
         <module>example-test</module>
+        <module>example-actuator</module>
     </modules>
 
     <properties>
