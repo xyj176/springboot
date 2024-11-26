@@ -53,27 +53,27 @@
             <version>11.2.0.3</version>
         </dependency>
         <!-- 达梦 -->
-        <dependency>
-            <groupId>com.dm</groupId>
-            <artifactId>DmJdbcDriver</artifactId>
-            <version>8.1.0.147</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dm</groupId>
-            <artifactId>DmDialect-for-hibernate</artifactId>
-            <version>5.3</version>
-        </dependency>
-        <!-- 人大金仓数据库kingbaseES V8R6 -->
-        <dependency>
-            <groupId>com.kingbase8</groupId>
-            <artifactId>kingbase8</artifactId>
-            <version>8.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.kingbase</groupId>
-            <artifactId>hibernate-dialect</artifactId>
-            <version>5.4.6.Finaldialect</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.dm</groupId>-->
+<!--            <artifactId>DmJdbcDriver</artifactId>-->
+<!--            <version>8.1.0.147</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.dm</groupId>-->
+<!--            <artifactId>DmDialect-for-hibernate</artifactId>-->
+<!--            <version>5.3</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; 人大金仓数据库kingbaseES V8R6 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.kingbase8</groupId>-->
+<!--            <artifactId>kingbase8</artifactId>-->
+<!--            <version>8.6.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.kingbase</groupId>-->
+<!--            <artifactId>hibernate-dialect</artifactId>-->
+<!--            <version>5.4.6.Finaldialect</version>-->
+<!--        </dependency>-->
         <!-- 适配不同版本的数据源驱动 end -->
 
         <!-- druid数据库连接池 -->
@@ -83,5 +83,17 @@
             <version>1.2.8</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!--1、把项目打包成一个可执行的超级JAR（uber-JAR）,包括把应用程序的所有依赖打入JAR文件内，
+                    并为JAR添加一个描述文件，其中的内容能让你用java -jar来运行应用程序。
+                2、搜索public static void main()方法来标记为可运行类-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
