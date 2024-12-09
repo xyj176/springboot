@@ -3,11 +3,6 @@ server:
   servlet:
     context-path: /xuyj
 
-# swagger文档登录信息
-swagger:
-  username: xuyj
-  password: 1234
-
 springfox:
   documentation:
     auto-startup: true
@@ -15,3 +10,8 @@ springfox:
 spring:
   application:
     name: spring-example-swagger
+  # 自定义security的用户名和密码
+  security:
+    user:
+      name: jerry
+      password: asd
