@@ -26,6 +26,7 @@ public class TimeInterceptor implements HandlerInterceptor {
     }
 
     @Override
+    //只有当被拦截的方法没有抛出异常成功时才会处理
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         System.out.println("开始拦截");
         System.out.println("拦截处理。。。");
@@ -33,10 +34,11 @@ public class TimeInterceptor implements HandlerInterceptor {
     }
 
     @Override
+    //无论被拦截的方法抛出异常与否都会执行
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         System.out.println("拦截完成");
         Long startTime = (Long) request.getAttribute("startTime");
-        System.out.println("拦截器耗时：" + (new Date().getTime() - startTime) + "ms");
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+        System.out.println("拦截器耗时：" + (new Date().getTime() - startTime) + "ms");
     }
 }
