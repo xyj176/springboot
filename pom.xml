@@ -28,6 +28,7 @@
         <module>example-actuator</module>
         <module>example-war</module>
         <module>example-exception</module>
+        <module>example-filter</module>
     </modules>
 
     <properties>
