@@ -30,6 +30,7 @@
         <module>example-exception</module>
         <module>example-filter</module>
         <module>example-interceptor</module>
+        <module>example-validator</module>
     </modules>
 
     <properties>
