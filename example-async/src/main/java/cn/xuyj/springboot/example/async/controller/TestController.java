@@ -30,4 +30,11 @@ public class TestController {
         service.syncMethod();
         log.info("主线程结束");
     }
+
+    @GetMapping("/async/threadPool")
+    public void testAsyncWithThreadPool() {
+        log.info("主线程开始");
+        service.asyncMethodWithThreadPool();
+        log.info("主线程结束");
+    }
 }

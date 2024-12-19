@@ -28,6 +28,16 @@ public class TestService {
         sleep();
     }
 
+    //指定线程池bean的名称，即可使用该线程池
+    @Async("asyncThreadPoolTaskExecutor")
+    public void asyncMethodWithThreadPool(){
+        log.info("异步线程开始");
+        log.info("异步方法内部线程名称：" + Thread.currentThread().getName());
+        sleep();
+        log.info("异步线程结束");
+    }
+
+    //自定义私有方法
     private void sleep() {
         try {
             //线程阻塞2s
