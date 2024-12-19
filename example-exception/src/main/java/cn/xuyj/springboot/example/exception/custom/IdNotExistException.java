@@ -8,14 +8,14 @@ import lombok.Data;
  * @since 2024/11/26 15:20
  */
 @Data
-public class IdNotExistException extends RuntimeException{
+public class IdNotExistException extends RuntimeException {
 
     private static final long serialVersionUID = 2738716652652563745L;
 
     private String id;
 
     public IdNotExistException(String id) {
-        super("id not exist");
+        super("id 【" + id + "】 not exist");
         this.id = id;
     }
 }
