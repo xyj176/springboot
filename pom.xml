@@ -33,6 +33,7 @@
         <module>example-validator</module>
         <module>example-async</module>
         <module>example-security</module>
+        <module>example-mongodb</module>
     </modules>
 
     <properties>
