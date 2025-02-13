@@ -36,6 +36,7 @@
         <module>example-mongodb</module>
         <module>example-ftp</module>
         <module>example-local-file-manage</module>
+        <module>example-infrastructure</module>
     </modules>
 
     <properties>
