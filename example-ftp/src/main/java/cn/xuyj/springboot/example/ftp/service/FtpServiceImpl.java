@@ -1,6 +1,7 @@
 package cn.xuyj.springboot.example.ftp.service;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.xuyj.springboot.example.ftp.config.FtpConfig;
 import cn.xuyj.springboot.example.infrastructure.util.ExceptionUtil;
 import cn.xuyj.springboot.example.lfm.util.XPathUtil;
@@ -56,10 +57,9 @@ public class FtpServiceImpl implements FtpService {
                     fos.write(buffer, 0, read);
                 }
             }
-            return localFilePath;
         } catch (Exception e) {
+            localFilePath = null;
             log.error("从ftp服务器下载数据失败：" + ExceptionUtil.getMessage(e));
-            return null;
         } finally {
             if (fos != null) {
                 try {
@@ -77,5 +77,8 @@ public class FtpServiceImpl implements FtpService {
             }
             ftpConfig.disConnect(ftpClient);
         }
+        if (StrUtil.isEmpty(localFilePath))
+            throw new RuntimeException("文件下载失败！");
+        return localFilePath;
     }
 }
