@@ -40,40 +40,42 @@ public class FtpConfig {
             ftpClient.connect(host, port);
             //判断是否连接成功
             if (FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
+                log.info("ftp连接成功！");
                 //用户名和密码不为空，则进行登录认证
                 if (StrUtil.isNotEmpty(userName) && StrUtil.isNotEmpty(password)) {
                     if (!ftpClient.login(userName, password)) {
-                        log.error("ftp服务器连接成功，但用户认证失败：" +
-                                "用户名【" + userName + "】或密码【" + password + "】错误");
+                        log.error("用户认证失败：用户名【" + userName + "】或密码【" + password + "】错误");
                         disConnect(ftpClient);
                         return null;
                     }
                 }
-                log.info("ftp连接成功！");
+                log.info("用户认证成功！");
                 //文件传输的方式
                 ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
                 //被动模式：调用FTPClient.enterLocalPassiveMode();这个方法的意思就是每次数据连接之前，ftp client告诉ftp server开通一个端口来传输数据
                 ftpClient.enterLocalPassiveMode();
                 return ftpClient;
             } else {
-                log.error("ftp服务器连接失败！");
+                log.error("ftp连接失败！请检查ftp服务器的ip和端口是否正确！");
                 disConnect(ftpClient);
                 return null;
             }
         } catch (Exception e) {
-            log.error("FTP连接失败：" + e.getMessage());
+            log.error("ftp连接错误：" + e + " at " + e.getStackTrace()[0]);
+            e.printStackTrace();
             return null;
         }
     }
 
     public void disConnect(FTPClient ftpClient) {
         try {
-            if (ftpClient != null && ftpClient.isConnected()){
+            if (ftpClient != null && ftpClient.isConnected()) {
                 ftpClient.logout();
                 ftpClient.disconnect();
             }
         } catch (Exception e) {
-            log.error("与ftp服务器断开链接失败：" + e.getMessage());
+            log.error("与ftp服务器断开链接失败：" + e + " at " + e.getStackTrace()[0]);
+            e.printStackTrace();
         }
     }
 }

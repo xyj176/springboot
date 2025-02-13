@@ -26,14 +26,13 @@ public class FtpServiceImpl implements FtpService {
     @Override
     public Boolean upload(String path) {
         FTPClient ftpClient = ftpConfig.connect();
-        if (ftpClient == null || !ftpClient.isAvailable())
-            return false;
         try {
             InputStream inputStream = new FileInputStream(path);
             //storeFile方法的第一个参数表示保存到远程ftp服务器上的文件的名称
             return ftpClient.storeFile(FileUtil.getName(path), inputStream);
         } catch (Exception e) {
-            log.error("文件上传失败：" + e.getMessage());
+            log.error("文件上传失败：" + e + " at " + e.getStackTrace()[0]);
+            e.printStackTrace();
             return false;
         } finally {
             ftpConfig.disConnect(ftpClient);
@@ -59,21 +58,24 @@ public class FtpServiceImpl implements FtpService {
             }
             return localFilePath;
         } catch (Exception e) {
-            log.error("从ftp服务器下载数据失败：" + e.getMessage());
+            log.error("从ftp服务器下载数据失败：" + e + " at " + e.getStackTrace()[0]);
+            e.printStackTrace();
             return null;
         } finally {
             if (fos != null) {
                 try {
                     fos.close();
                 } catch (Exception e) {
-                    log.error("关闭文件流失败：" + e.getMessage());
+                    log.error("关闭文件流失败：" + e + " at " + e.getStackTrace()[0]);
+                    e.printStackTrace();
                 }
             }
             if (ins != null) {
                 try {
                     ins.close();
                 } catch (Exception e) {
-                    log.error("文件流关闭失败：" + e.getMessage());
+                    log.error("文件流关闭失败：" + e + " at " + e.getStackTrace()[0]);
+                    e.printStackTrace();
                 }
             }
             ftpConfig.disConnect(ftpClient);
