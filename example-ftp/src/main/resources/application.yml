@@ -1,0 +1,11 @@
+server:
+  servlet:
+    context-path: /ftp
+  port: 8080
+
+ftp:
+  host: 192.168.2.230
+  port: 21
+  username: dist
+  password: dist@2023
+  path: E:/ftp

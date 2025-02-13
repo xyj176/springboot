@@ -34,6 +34,7 @@
         <module>example-async</module>
         <module>example-security</module>
         <module>example-mongodb</module>
+        <module>example-ftp</module>
     </modules>
 
     <properties>
