@@ -14,7 +14,7 @@ public class ExceptionUtil {
      */
     public static String getMessage(Exception e) {
         e.printStackTrace();
-        String message = e + " at " + e.getStackTrace()[0];
+        String message = e + ":" + e.getMessage() + " at " + e.getStackTrace()[0];
         return message;
     }
 }

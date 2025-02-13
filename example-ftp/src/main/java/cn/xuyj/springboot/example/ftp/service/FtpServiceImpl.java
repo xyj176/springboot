@@ -3,6 +3,7 @@ package cn.xuyj.springboot.example.ftp.service;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.xuyj.springboot.example.ftp.config.FtpConfig;
+import cn.xuyj.springboot.example.infrastructure.exception.FileNotExistException;
 import cn.xuyj.springboot.example.infrastructure.util.ExceptionUtil;
 import cn.xuyj.springboot.example.lfm.util.XPathUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -49,16 +51,16 @@ public class FtpServiceImpl implements FtpService {
         FileOutputStream fos = null;
         try {
             ins = ftpClient.retrieveFileStream(fileName);
-            if (ins != null) {
-                localFilePath = XPathUtil.combine(XPathUtil.createTmpDir(), fileName);
-                fos = new FileOutputStream(localFilePath);
-                byte[] buffer = new byte[1024];
-                int read;
-                while ((read = ins.read(buffer)) != -1) {
-                    fos.write(buffer, 0, read);
-                }
+            if (ins == null)
+                throw new FileNotExistException(fileName);
+            localFilePath = XPathUtil.combine(XPathUtil.createTmpDir(), fileName);
+            fos = new FileOutputStream(localFilePath);
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = ins.read(buffer)) != -1) {
+                fos.write(buffer, 0, read);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             localFilePath = null;
             log.error("从ftp服务器下载数据失败：" + ExceptionUtil.getMessage(e));
         } finally {

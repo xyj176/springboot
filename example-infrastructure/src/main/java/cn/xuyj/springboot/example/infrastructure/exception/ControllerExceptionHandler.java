@@ -24,4 +24,12 @@ public class ControllerExceptionHandler {
         log.error("全局异常信息：" + message);
         return ControllerResponseData.fail(message);
     }
+
+    @ExceptionHandler(FileNotExistException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ControllerResponseData handleFileNotExistException(FileNotExistException e) {
+        String message = ExceptionUtil.getMessage(e);
+        log.error(message);
+        return ControllerResponseData.fail(message);
+    }
 }
