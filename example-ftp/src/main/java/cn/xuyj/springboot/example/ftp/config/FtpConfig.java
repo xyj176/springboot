@@ -1,6 +1,7 @@
 package cn.xuyj.springboot.example.ftp.config;
 
 import cn.hutool.core.util.StrUtil;
+import cn.xuyj.springboot.example.infrastructure.util.ExceptionUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
@@ -61,8 +62,7 @@ public class FtpConfig {
                 return null;
             }
         } catch (Exception e) {
-            log.error("ftp连接错误：" + e + " at " + e.getStackTrace()[0]);
-            e.printStackTrace();
+            log.error("ftp连接错误：" + ExceptionUtil.getMessage(e));
             return null;
         }
     }
@@ -74,8 +74,7 @@ public class FtpConfig {
                 ftpClient.disconnect();
             }
         } catch (Exception e) {
-            log.error("与ftp服务器断开链接失败：" + e + " at " + e.getStackTrace()[0]);
-            e.printStackTrace();
+            log.error("与ftp服务器断开链接失败：" + ExceptionUtil.getMessage(e));
         }
     }
 }

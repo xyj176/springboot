@@ -2,6 +2,7 @@ package cn.xuyj.springboot.example.ftp.service;
 
 import cn.hutool.core.io.FileUtil;
 import cn.xuyj.springboot.example.ftp.config.FtpConfig;
+import cn.xuyj.springboot.example.infrastructure.util.ExceptionUtil;
 import cn.xuyj.springboot.example.lfm.util.XPathUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
@@ -31,8 +32,7 @@ public class FtpServiceImpl implements FtpService {
             //storeFile方法的第一个参数表示保存到远程ftp服务器上的文件的名称
             return ftpClient.storeFile(FileUtil.getName(path), inputStream);
         } catch (Exception e) {
-            log.error("文件上传失败：" + e + " at " + e.getStackTrace()[0]);
-            e.printStackTrace();
+            log.error("文件上传失败：" + ExceptionUtil.getMessage(e));
             return false;
         } finally {
             ftpConfig.disConnect(ftpClient);
@@ -58,24 +58,21 @@ public class FtpServiceImpl implements FtpService {
             }
             return localFilePath;
         } catch (Exception e) {
-            log.error("从ftp服务器下载数据失败：" + e + " at " + e.getStackTrace()[0]);
-            e.printStackTrace();
+            log.error("从ftp服务器下载数据失败：" + ExceptionUtil.getMessage(e));
             return null;
         } finally {
             if (fos != null) {
                 try {
                     fos.close();
                 } catch (Exception e) {
-                    log.error("关闭文件流失败：" + e + " at " + e.getStackTrace()[0]);
-                    e.printStackTrace();
+                    log.error("关闭文件流失败：" + ExceptionUtil.getMessage(e));
                 }
             }
             if (ins != null) {
                 try {
                     ins.close();
                 } catch (Exception e) {
-                    log.error("文件流关闭失败：" + e + " at " + e.getStackTrace()[0]);
-                    e.printStackTrace();
+                    log.error("文件流关闭失败：" + ExceptionUtil.getMessage(e));
                 }
             }
             ftpConfig.disConnect(ftpClient);
