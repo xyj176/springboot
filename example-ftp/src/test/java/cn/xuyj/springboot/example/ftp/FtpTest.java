@@ -25,4 +25,11 @@ public class FtpTest {
         Boolean upload = service.upload(localPath);
         System.out.println(upload);
     }
+
+    @Test
+    public void testDownload() {
+        String fileName = "123.docx";
+        String download = service.download(fileName);
+        System.out.println(download);
+    }
 }

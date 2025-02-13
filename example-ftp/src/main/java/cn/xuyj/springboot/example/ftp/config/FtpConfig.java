@@ -68,8 +68,10 @@ public class FtpConfig {
 
     public void disConnect(FTPClient ftpClient) {
         try {
-            if (ftpClient != null && ftpClient.isConnected())
+            if (ftpClient != null && ftpClient.isConnected()){
+                ftpClient.logout();
                 ftpClient.disconnect();
+            }
         } catch (Exception e) {
             log.error("与ftp服务器断开链接失败：" + e.getMessage());
         }

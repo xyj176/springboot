@@ -35,6 +35,7 @@
         <module>example-security</module>
         <module>example-mongodb</module>
         <module>example-ftp</module>
+        <module>example-local-file-manage</module>
     </modules>
 
     <properties>
