@@ -7,6 +7,7 @@ import cn.xuyj.springboot.example.infrastructure.util.ExceptionUtil;
 import cn.xuyj.springboot.example.lfm.util.XPathUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,5 +81,18 @@ public class FtpServiceImpl implements FtpService {
         if (StrUtil.isEmpty(localFilePath))
             throw new RuntimeException("文件下载失败！");
         return localFilePath;
+    }
+
+    @Override
+    public Boolean exist(String fileName) {
+        FTPClient ftpClient = ftpConfig.connect();
+        try {
+            FTPFile[] ftpFiles = ftpClient.listFiles(fileName);
+            if (ftpFiles.length > 0)
+                return true;
+        } catch (Exception e) {
+            log.error("判断文件是否存在出错：" + ExceptionUtil.getMessage(e));
+        }
+        return false;
     }
 }

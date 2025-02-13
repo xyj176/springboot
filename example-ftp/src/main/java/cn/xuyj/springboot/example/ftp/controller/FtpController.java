@@ -19,4 +19,9 @@ public class FtpController {
     public String download(String fileName) {
         return service.download(fileName);
     }
+
+    @GetMapping("/exist")
+    public Boolean exist(String fileName) {
+        return service.exist(fileName);
+    }
 }

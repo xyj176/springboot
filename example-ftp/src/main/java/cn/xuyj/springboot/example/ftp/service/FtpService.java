@@ -21,4 +21,12 @@ public interface FtpService {
      * @return 返回本地保存的文件路径
      */
     String download(String fileName);
+
+    /**
+     * 判断文件是否存在
+     *
+     * @param fileName
+     * @return
+     */
+    Boolean exist(String fileName);
 }
