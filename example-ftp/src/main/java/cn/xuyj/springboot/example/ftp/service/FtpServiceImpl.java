@@ -43,13 +43,20 @@ public class FtpServiceImpl implements FtpService {
     @Override
     public String download(String fileName) {
         FTPClient ftpClient = ftpConfig.connect();
-        String localFilePath = XPathUtil.combine(XPathUtil.createTmpDir(), fileName);
+        String localFilePath = null;
+        InputStream ins = null;
         FileOutputStream fos = null;
         try {
-            fos = new FileOutputStream(localFilePath);
-            boolean retrieve = ftpClient.retrieveFile(fileName, fos);
-            if (!retrieve)
-                localFilePath = null;
+            ins = ftpClient.retrieveFileStream(fileName);
+            if (ins != null) {
+                localFilePath = XPathUtil.combine(XPathUtil.createTmpDir(), fileName);
+                fos = new FileOutputStream(localFilePath);
+                byte[] buffer = new byte[1024];
+                int read;
+                while ((read = ins.read(buffer)) != -1) {
+                    fos.write(buffer, 0, read);
+                }
+            }
             return localFilePath;
         } catch (Exception e) {
             log.error("从ftp服务器下载数据失败：" + e.getMessage());
@@ -60,6 +67,13 @@ public class FtpServiceImpl implements FtpService {
                     fos.close();
                 } catch (Exception e) {
                     log.error("关闭文件流失败：" + e.getMessage());
+                }
+            }
+            if (ins != null) {
+                try {
+                    ins.close();
+                } catch (Exception e) {
+                    log.error("文件流关闭失败：" + e.getMessage());
                 }
             }
             ftpConfig.disConnect(ftpClient);
