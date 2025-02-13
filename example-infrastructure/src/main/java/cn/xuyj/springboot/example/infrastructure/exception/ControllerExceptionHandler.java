@@ -22,7 +22,6 @@ public class ControllerExceptionHandler {
     public ControllerResponseData handleDefaultException(Exception e) {
         String message = ExceptionUtil.getMessage(e);
         log.error("全局异常信息：" + message);
-        e.printStackTrace();
         return ControllerResponseData.fail(message);
     }
 }
