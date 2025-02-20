@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /kafka
+
+spring:
+  kafka:
+    bootstrap-servers: 192.168.2.230:9092
+    consumer:
+      group-id: test-consumer
+      auto-offset-reset: latest
