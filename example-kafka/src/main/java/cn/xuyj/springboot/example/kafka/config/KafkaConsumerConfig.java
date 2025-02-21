@@ -1,11 +1,11 @@
 package cn.xuyj.springboot.example.kafka.config;
 
 import cn.xuyj.springboot.example.kafka.domain.Message;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.listener.adapter.RecordFilterStrategy;
@@ -15,11 +15,11 @@ import org.springframework.kafka.listener.adapter.RecordFilterStrategy;
  * @des 描述
  * @since 2025/2/20 15:45
  */
-@EnableKafka
 @Configuration
+@Slf4j
 public class KafkaConsumerConfig {
     @Autowired
-    ConsumerFactory<String,Object> consumerFactory;
+    ConsumerFactory<String, Object> consumerFactory;
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
@@ -31,9 +31,9 @@ public class KafkaConsumerConfig {
             @Override
             public boolean filter(ConsumerRecord<String, Object> consumerRecord) {
                 Object value = consumerRecord.value();
-                if (value instanceof String){
+                if (value instanceof String) {
                     return ((String) value).contains("fuck");
-                }else if (value instanceof Message){
+                } else if (value instanceof Message) {
                     return ((Message) value).getInfo().contains("fuck");
                 }
                 return false;
