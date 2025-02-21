@@ -2,6 +2,7 @@ package cn.xuyj.springboot.example.kafka.service;
 
 import cn.xuyj.springboot.example.kafka.domain.Message;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -13,31 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class MessageListener {
-    @KafkaListener(topics = "test",groupId = "test-consumer")
-    public void listen(String message) {
-        log.info("接收到消息：{}", message);
-    }
 
-    @KafkaListener(topics = "test")
-    public void listen(Message message) {
-        log.info("接收到消息：{}", message.toString());
+    @KafkaListener(topics = "test", groupId = "test-consumer",containerFactory = "kafkaListenerContainerFactory")
+    public void listen(Object message) {
+        if (message instanceof ConsumerRecord) {
+            Object value = ((ConsumerRecord) message).value();
+            if (value instanceof String)
+                log.info("接收String消息：{}", value);
+            if (value instanceof Message) {
+                log.info("接收Message消息：{}", value);
+            }
+        }
     }
-
-//    //获取消息来自哪个分区
-//    @KafkaListener(topics = "test")
-//    public void listen(@Payload String message,
-//                       @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
-//        log.info("接收到消息：{}，partition：{}", message, partition);
-//    }
-//
-//    //指定接收特定分区的消息
-//    //如果不需要指定initialOffset，代码可以简化为：
-//    // @KafkaListener(groupId = "test-consumer",topicPartitions = @TopicPartition(topic = "test", partitions = { "0", "1" }))
-//    @KafkaListener(groupId = "test-consumer",
-//            topicPartitions = @TopicPartition(topic = "test",
-//                    partitionOffsets = {@PartitionOffset(partition = "0", initialOffset = "0")}))
-//    public void listenWithPartition(@Payload String message,
-//                                    @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
-//        log.info("接收消息: {}，partition：{}", message, partition);
-//    }
 }

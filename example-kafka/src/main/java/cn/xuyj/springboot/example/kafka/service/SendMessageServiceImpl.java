@@ -18,22 +18,19 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Slf4j
 public class SendMessageServiceImpl implements SendMessageService {
     @Autowired
-    KafkaTemplate<String, String> stringKafkaTemplate;
-
-    @Autowired
-    KafkaTemplate<String, Object> objectKafkaTemplate;
+    KafkaTemplate<String, Object> kafkaTemplate;
 
     @Override
     public void send(String message) {
-        ListenableFuture<SendResult<String, String>> send = stringKafkaTemplate.send("test", message);
-        send.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+        ListenableFuture<SendResult<String, Object>> send = kafkaTemplate.send("test", message);
+        send.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
             @Override
             public void onFailure(Throwable ex) {
                 log.error("消息【{}】发送失败，原因：{}", message, ex);
             }
 
             @Override
-            public void onSuccess(SendResult<String, String> result) {
+            public void onSuccess(SendResult<String, Object> result) {
                 log.info("消息【{}】发送成功！offset = [{}]", message, result.getRecordMetadata().offset());
             }
         });
@@ -41,7 +38,8 @@ public class SendMessageServiceImpl implements SendMessageService {
 
     @Override
     public void send(Message message) {
-        ListenableFuture<SendResult<String, Object>> send = objectKafkaTemplate.send("test", message);
+
+        ListenableFuture<SendResult<String, Object>> send = kafkaTemplate.send("test", message);
         send.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
             @Override
             public void onFailure(Throwable ex) {
