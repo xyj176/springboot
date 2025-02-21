@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,19 +22,24 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers:localhost:9092}")
     private String bootstrapServers;
 
-    @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    @Bean(name = "stringKafkaTemplate")
+    public KafkaTemplate<String, String> kafkaTemplate() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        //指定key、value的序列化策略，暂时只发送简单的字符串类型消息
+        //指定key、value的序列化策略，发送简单的字符串类型消息
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        return new DefaultKafkaProducerFactory<>(configProps);
+        //KafkaTemplate对象用来发送消息
+        return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(configProps));
     }
 
-    @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() {
-        //KafkaTemplate对象用来发送消息
-        return new KafkaTemplate<>(producerFactory());
+    @Bean(name = "objectKafkaTemplate")
+    public KafkaTemplate<String, Object> objectKafkaTemplate() {
+        Map<String,Object> configs = new HashMap<>();
+        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
+        //指定key、value的序列化策略，支持发送复杂的对象
+        configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,StringSerializer.class);
+        configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(configs));
     }
 }

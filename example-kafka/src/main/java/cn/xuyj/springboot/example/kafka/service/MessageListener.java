@@ -1,5 +1,6 @@
 package cn.xuyj.springboot.example.kafka.service;
 
+import cn.xuyj.springboot.example.kafka.domain.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -12,9 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class MessageListener {
-    @KafkaListener(topics = "test")
+    @KafkaListener(topics = "test",groupId = "test-consumer")
     public void listen(String message) {
         log.info("接收到消息：{}", message);
+    }
+
+    @KafkaListener(topics = "test")
+    public void listen(Message message) {
+        log.info("接收到消息：{}", message.toString());
     }
 
 //    //获取消息来自哪个分区
