@@ -38,6 +38,7 @@
         <module>example-local-file-manage</module>
         <module>example-infrastructure</module>
         <module>example-kafka</module>
+        <module>example-hello</module>
     </modules>
 
     <properties>

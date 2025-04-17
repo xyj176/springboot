@@ -1,0 +1,11 @@
+server:
+  tomcat:
+    #omcat内嵌服务器的连接池的最大连接数,默认值8192
+    max-connections: 5
+    #Tomcat内嵌服务器的工作线程池的最大工作线程数，默认值200
+    max-threads: 5
+    #工作线程池的最小空闲线程数量，即使没有请求需要处理，也会保持这些线程处于等待状态，以便快速响应新的请求，默认值10
+    min-spare-threads: 2
+    #Tomcat连接器所允许的最大等待接受连接的请求数（即等待队列），默认值100
+    accept-count: 2
+    connection-timeout: 20000
