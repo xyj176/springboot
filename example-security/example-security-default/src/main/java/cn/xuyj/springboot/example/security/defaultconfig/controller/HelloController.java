@@ -1,12 +1,13 @@
-package cn.xuyj.springboot.example.security.controller;
+package cn.xuyj.springboot.example.security.defaultconfig.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author xuyj
- * @des 描述
- * @since 2024/12/19 15:59
+ * @Author: xuyj
+ * @Date: 2025/5/17 11:45
+ * @Email: 1768335576@qq.com
+ * @Desc：类描述
  */
 @RestController
 public class HelloController {
@@ -15,6 +16,6 @@ public class HelloController {
     // 默认用户名是user，密码会自动输出到控制台
     @GetMapping("/hello")
     public String hello() {
-        return "hello spring security!";
+        return "hello security with default config!";
     }
 }
