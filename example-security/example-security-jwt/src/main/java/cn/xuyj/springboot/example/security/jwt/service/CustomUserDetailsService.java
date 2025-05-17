@@ -23,14 +23,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //验证用户名和密码
+        //验证用户名
         CustomUser customUser = findByUserName(username);
         if (customUser == null) {
             throw new RuntimeException("用户【"+username+"】不存在");
         }
+        //这里返回正确的密码，后续会和登录请求中的密码进行匹配
         User user = new User(username, customUser.getPassword(),
                 true, true, true, true,
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+                AuthorityUtils.commaSeparatedStringToAuthorityList("user"));
         return user;
     }
 
