@@ -1,5 +1,6 @@
 package cn.xuyj.springboot.example.security.jwt.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloController {
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello security with jwt";
+    @GetMapping("/admin/hello")
+    @PreAuthorize("hasAnyAuthority('admin')")
+    public String adminHello() {
+        return "hello security with jwt.admin!";
+    }
+
+    @GetMapping("/user/hello")
+    @PreAuthorize("hasAnyAuthority('user')")
+    public String userHello() {
+        return "hello security with jwt.user!";
     }
 }

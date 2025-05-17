@@ -14,4 +14,8 @@ import java.io.Serializable;
 public class CustomUser implements Serializable {
     private String username;
     private String password;
+    /**
+     * 权限
+     */
+    private String authority;
 }
