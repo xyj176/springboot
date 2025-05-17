@@ -45,6 +45,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(httpServletRequest, httpServletResponse);
         }catch (Exception e){
+            //filter中的异常无法被@RestControllerAdvice捕获，所以需要手动返回
             String message = ExceptionUtil.getMessage(e);
             httpServletResponse.setCharacterEncoding("UTF-8"); // 设置字符集
             httpServletResponse.setContentType("application/json; charset=UTF-8");
