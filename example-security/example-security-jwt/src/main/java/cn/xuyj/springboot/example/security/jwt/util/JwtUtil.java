@@ -1,6 +1,7 @@
 package cn.xuyj.springboot.example.security.jwt.util;
 
 import cn.xuyj.springboot.example.infrastructure.util.ExceptionUtil;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +60,10 @@ public class JwtUtil {
     public boolean validateToken(String token) {
         try{
             Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
-        }catch (Exception e){
+        }catch (ExpiredJwtException e){
+            throw new RuntimeException("【token已过期】："+ExceptionUtil.getMessage(e));
+        }
+        catch (Exception e){
             throw new RuntimeException("【token验证失败】："+ExceptionUtil.getMessage(e));
         }
         return true;
