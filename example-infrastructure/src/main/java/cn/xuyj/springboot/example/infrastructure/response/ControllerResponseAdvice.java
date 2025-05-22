@@ -23,10 +23,12 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice {
     /**
      * 判断是否要执行 beforeBodyWrite 方法，true为执行，false不执行，有注解标记的时候处理返回值
      * 这里整合swagger出现了问题，swagger相关的不拦截
+     * 文件流不拦截
      */
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        return !returnType.getDeclaringClass().getName().contains("springfox");
+        return !returnType.getDeclaringClass().getName().contains("springfox")&&
+                !returnType.getParameterType().equals(byte[].class);
     }
 
     @SneakyThrows
