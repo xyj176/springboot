@@ -1,4 +1,4 @@
-package cn.xuyj.springboot.example.security.config;
+package cn.xuyj.springboot.example.security.custom.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package cn.xuyj.springboot.example.security.service;
+package cn.xuyj.springboot.example.security.custom.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
